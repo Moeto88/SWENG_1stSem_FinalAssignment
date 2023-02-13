@@ -46,7 +46,7 @@ def formatArrayForReturn(x0, x1, x2, x3, x4, x5, x6):
     return formattedTupleArray
 
 
-def getCommitsFromLast7Days(username, repoInput):
+# def getCommitsFromLast7Days(username, repoInput):
     g = Github('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')
     user = g.get_user(username)
     user.login
@@ -139,10 +139,10 @@ def graph():
     repoName = nameWithRepo[spaceIndex+1:]
     
     
-    data1 = getCommitsFromLast7Days(username, repoName)
+    # data1 = getCommitsFromLast7Days(username, repoName)
 
-    labels1 = [row[0] for row in data1]
-    values1 = [row[1] for row in data1]
+    # labels1 = [row[0] for row in data1]
+    # values1 = [row[1] for row in data1]
  
 
     # DOESNT WORK 
@@ -155,4 +155,4 @@ def graph():
         colorPalette.append(rgb)
     
     
-    return render_template("dashboard/graph.html", labels1 = labels1, values1 = values1,labels2 = labels2, values2 = values2, username = username, repoName = repoName, colorList = colorPalette)
+    return render_template("dashboard/graph.html", labels2 = labels2, values2 = values2, username = username, repoName = repoName, colorList = colorPalette)
