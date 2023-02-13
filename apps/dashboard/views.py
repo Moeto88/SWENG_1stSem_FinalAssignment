@@ -46,70 +46,7 @@ def formatArrayForReturn(x0, x1, x2, x3, x4, x5, x6):
     return formattedTupleArray
 
 
-# def getCommitsFromLast7Days(username, repoInput):
-    g = Github('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')
-    user = g.get_user(username)
-    user.login
 
-    global commitsDay0, commitsDay1, commitsDay2, commitsDay3, commitsDay4, commitsDay5, commitsDay6
-    commitsDay0 = 0
-    commitsDay1 = 0
-    commitsDay2 = 0
-    commitsDay3 = 0
-    commitsDay4 = 0
-    commitsDay5 = 0
-    commitsDay6 = 0
-
-    ## go through repos
-    for repo in user.get_repos():
-
-        ## if repo matches selected repository
-        if repo.name == repoInput:
-
-            # we access the commit
-            for commit in repo.get_commits():
-
-                # if a commit is made by the logged-in user
-                if commit.author == user: 
-
-                    #we access the date the commit was made
-                    commitDate = commit.commit.author.date
-
-                    #turn it into a datetime object
-                    date1 = DT.date(commitDate.year, commitDate.month, commitDate.day)
-
-                    # check whether it was made within the last seven days
-                    # last seven_days_pos returns 0 if the change was made 6 days ago, 1 if it was made 5 days ago, etc.
-                    # last_seven_days_pos max return value is 6 <-- last index in the array to return
-                    day_in_array = last_seven_days_pos(date1)
-
-                    # check if commit was made within the last seven days
-                    if (day_in_array >=0):
-
-                        ## adding commits to counts per day
-                        match day_in_array:
-                            case 0:
-                                commitsDay0 += 1
-                            case 1:
-                                commitsDay1 += 1
-                            case 2:
-                                commitsDay2 += 1
-                            case 3:
-                                commitsDay3 += 1
-                            case 4:
-                                commitsDay4 += 1
-                            case 5:
-                                commitsDay5 += 1
-                            case 6:
-                                commitsDay6 += 1
-                            case _:
-                                continue
-            break
-
-    ## forming the array to return
-    commitsPerDay = formatArrayForReturn(commitsDay0, commitsDay1, commitsDay2, commitsDay3, commitsDay4, commitsDay5, commitsDay6)
-
-    return commitsPerDay
 
 
 def getRepoLanguages(repoName,username):
