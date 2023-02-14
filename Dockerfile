@@ -21,7 +21,7 @@ ENV HOME=/app
 WORKDIR /app
 
 # Install requirements
-RUN conda install --yes --file requirements.txt
+RUN conda install -c conda-forge --yes --file requirements.txt
 
 # Open port
 EXPOSE 5000
