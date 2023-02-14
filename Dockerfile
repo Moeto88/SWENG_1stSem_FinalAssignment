@@ -2,10 +2,12 @@ FROM continuumio/miniconda3
 
 WORKDIR /sweng_test
 
+SHELL ["/bin/bash", "--login", "-c"]
+
 COPY environment.yml .
 RUN conda env create -f environment.yml
 
-SHELL ["conda", "run", "-n", "env", "/bin/bash", "-c"]
+RUN conda init bash
 
 RUN conda activate env
 
