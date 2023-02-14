@@ -3,13 +3,11 @@ name: OpenShift
 env:
   APP_NAME: "sweng_test"
   APP_PORT: "8080"
-  OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
-  OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
-  OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_PROJECT }}
+  OPENSHIFT_NAMESPACE: "moeto88-dev"
   
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:   
   openshift-deploy:
@@ -35,8 +33,8 @@ jobs:
     - name: Log in to OpenShift 
       uses: redhat-actions/oc-login@v1
       with:
-        openshift_server_url: ${{ env.OPENSHIFT_SERVER }}
-        openshift_token: ${{ env.OPENSHIFT_TOKEN }}
+        openshift_server_url: ${{ secrets.OPENSHIFT_SERVER }}
+        openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
         insecure_skip_tls_verify: true
         namespace: ${{ env.OPENSHIFT_NAMESPACE }}
 
