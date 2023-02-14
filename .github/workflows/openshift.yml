@@ -1,7 +1,7 @@
 name: OpenShift
 
 env:
-  APP_NAME: "sweng_test"
+  APP_NAME: "test"
   APP_PORT: "8080"
   OPENSHIFT_NAMESPACE: "moeto88-dev"
   
@@ -45,6 +45,6 @@ jobs:
       uses: redhat-actions/oc-new-app@v1
       with:
         app_name: ${{ env.APP_NAME }}
-        image: quay.io/sweng_moeto/sweng_test
+        image: quay.io/moeto88/test
         namespace: ${{ env.OPENSHIFT_NAMESPACE }}
         port: ${{ env.APP_PORT }}
