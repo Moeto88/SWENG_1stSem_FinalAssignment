@@ -5,8 +5,6 @@ ARG PORT=local
 ENV PORT ${PORT}
 # Set the working directory to /api
 WORKDIR /api
-# copy package.json into the container at /api
-COPY package*.json .
 # install dependencies
 RUN npm install
 # Copy the current directory contents into the container at /api
