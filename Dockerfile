@@ -6,7 +6,7 @@ COPY . ./
 
 RUN chmod +x boot.sh
 
-RUN Conda env create -f environment.yml
+RUN conda env create -f environment.yml
 
 RUN echo "source activate testForOS" &gt; ~/.bashrc
 ENV PATH /opt/conda/envs/testForOS/bin:$PATH
