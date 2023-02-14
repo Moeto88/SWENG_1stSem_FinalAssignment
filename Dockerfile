@@ -2,7 +2,8 @@ FROM continuumio/miniconda3
 
 WORKDIR /sweng_test
 
-RUN conda env create
+COPY environment.yml .
+RUN conda env create -f environment.yml
 RUN conda activate env
 
 COPY requirements.txt requirements.txt
