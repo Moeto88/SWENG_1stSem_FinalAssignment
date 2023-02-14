@@ -1,24 +1,27 @@
-FROM continuumio/miniconda3
+# syntax=docker/dockerfile:1.4
+FROM --platform=$BUILDPLATFORM python:3.10-alpine AS builder
 
 WORKDIR /sweng_test
 
-SHELL ["/bin/bash", "--login", "-c"]
+COPY requirements.txt /sweng_test
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip3 install -r requirements.txt
 
-COPY environment.yml .
-RUN conda env create -f environment.yml
+COPY . /sweng_test
 
-RUN conda init bash
+ENTRYPOINT ["python3"]
+CMD ["setup.py"]
 
-RUN conda activate env
+FROM builder as dev-envs
 
-COPY requirements.txt requirements.txt
+RUN <<EOF
+apk update
+apk add git
+EOF
 
-RUN pip install -r requirements.txt
-
-COPY . .
-
-RUN export FLASK_APP=setup.py
-
-RUN python -c "import flask"
-
-CMD [ "python", "-m" , "flask", "run", "--host=0.0.0.0"]
+RUN <<EOF
+addgroup -S docker
+adduser -S --shell /bin/bash --ingroup docker vscode
+EOF
+# install Docker tools (cli, buildx, compose)
+COPY --from=gloursdocker/docker / /
