@@ -1,15 +1,15 @@
-# Use a lighter version of Node as a parent image
-FROM mhart/alpine-node:latest
-# Set up arguments
-ARG PORT=local
-ENV PORT ${PORT}
-# Set the working directory to /api
-WORKDIR /api
-# install dependencies
-RUN npm install
-# Copy the current directory contents into the container at /api
+# syntax=docker/dockerfile:1
+
+FROM python:3.10-alpine
+
+WORKDIR /sweng_test
+
+COPY requirements.txt requirements.txt
+
+RUN pip install -r requirements.txt
+
 COPY . .
-# Expose port
-EXPOSE ${PORT}
-# Run the app when the container launches
-CMD ["node", "app.js"]
+
+RUN export FLASK_APP=setup.py
+
+CMD [ "python", "-m" , "flask", "run", "--host=0.0.0.0"]
