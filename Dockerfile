@@ -1,8 +1,9 @@
-# syntax=docker/dockerfile:1
-
-FROM python:3.10-alpine
+FROM continuumio/miniconda3
 
 WORKDIR /sweng_test
+
+RUN conda env create
+RUN conda activate env
 
 COPY requirements.txt requirements.txt
 
