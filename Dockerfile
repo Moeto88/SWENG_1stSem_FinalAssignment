@@ -1,22 +1,16 @@
-# start by pulling the python image
-FROM python:3.8-alpine
+FROM continuumio/miniconda:latest
 
-# copy the requirements file into the image
-COPY ./requirements.txt /sweng_test/requirements.txt
-
-# switch working directory
 WORKDIR /sweng_test
 
-RUN ls
+COPY . ./
 
-# install the dependencies and packages in the requirements file
-RUN apt-get update && apt-get install -y \
-    libgeos-dev
+RUN chmod +x boot.sh
 
-RUN pip install -r requirements.txt
+RUN Conda env create -f environment.yml
 
-# copy every content from the local file to the image
-COPY . /sweng_test
+RUN echo "source activate testForOS" &gt; ~/.bashrc
+ENV PATH /opt/conda/envs/testForOS/bin:$PATH
 
-# configure the container to run in an executed manner
-ENTRYPOINT [ "python" ]
+EXPOSE 5000
+
+ENTRYPOINT ["./boot.sh"]
