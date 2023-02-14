@@ -3,7 +3,6 @@ name: OpenShiftDeployment
 env:
   APP_NAME: "sweng_test"
   APP_PORT: "8080"
-  
   OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
   OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
   OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_PROJECT }}
