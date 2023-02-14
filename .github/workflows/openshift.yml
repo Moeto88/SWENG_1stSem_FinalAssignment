@@ -30,7 +30,7 @@ jobs:
           oc: 4
  
       # https://github.com/redhat-actions/oc-login#readme
-      - name: Log in to OpenShift
+      - name: Log in to OpenShift 
         uses: redhat-actions/oc-login@v1
         with:
           openshift_server_url: ${{ env.OPENSHIFT_SERVER }}
