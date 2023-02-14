@@ -20,8 +20,9 @@ COPY . /app
 ENV HOME=/app
 WORKDIR /app
 
+RUN conda config --append channels conda-forge
 # Install requirements
-RUN conda install -c conda-forge --yes --file requirements.txt
+RUN conda install --yes --file requirements.txt
 
 # Open port
 EXPOSE 5000
