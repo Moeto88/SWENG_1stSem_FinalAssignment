@@ -56,3 +56,4 @@ dependencies:
     - wrapt==1.14.1
     - yarg==0.1.9
     - zipp==3.13.0
+    - gunicorn
